@@ -6,9 +6,13 @@ import '../view.dart';
 class ClockItemView implements View {
   final ClockItem item;
 
-  ClockItemView(this.item);
+  final root = DivElement();
 
-  DivElement build() {
+  ClockItemView(this.item) {
+    _build();
+  }
+
+  void _build() {
     // TODO
   }
 }

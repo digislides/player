@@ -6,9 +6,11 @@ import '../view.dart';
 class WeatherItemView implements View {
   final WeatherItem item;
 
+  final root = DivElement();
+
   WeatherItemView(this.item);
 
-  DivElement build() {
+  void build() {
     // TODO
   }
 }

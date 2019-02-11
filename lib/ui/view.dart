@@ -1,5 +1,5 @@
 import 'dart:html';
 
 abstract class View {
-  DivElement build();
+  DivElement get root;
 }

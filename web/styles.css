@@ -24,8 +24,13 @@ html, body {
 }
 
 .page {
+  display: none;
   position: relative;
   overflow: hidden;
+}
+
+.page.show {
+  display: block;
 }
 
 .page-item {

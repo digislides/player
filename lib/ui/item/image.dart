@@ -6,11 +6,15 @@ import '../view.dart';
 class ImageItemView implements View {
   final ImageItem item;
 
-  ImageItemView(this.item);
+  final root = DivElement();
 
-  DivElement build() {
-    final root = DivElement()
-      ..classes.addAll(['page-item', 'page-item-text', 'page-item-${item.id}']);
+  ImageItemView(this.item) {
+    _build();
+  }
+
+  void _build() {
+    root.classes
+        .addAll(['page-item', 'page-item-text', 'page-item-${item.id}']);
 
     root.style.width = '${item.width}px';
     root.style.height = '${item.height}px';
@@ -22,7 +26,5 @@ class ImageItemView implements View {
     root.style.backgroundImage = item.imageUrl;
     root.style.backgroundRepeat = item.fit.repeatCss;
     root.style.backgroundSize = item.fit.sizeCss;
-
-    return root;
   }
 }

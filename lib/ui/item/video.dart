@@ -6,9 +6,11 @@ import '../view.dart';
 class VideoItemView implements View {
   final VideoItem item;
 
+  final root = DivElement();
+
   VideoItemView(this.item);
 
-  DivElement build() {
+  void build() {
     // TODO
   }
 }

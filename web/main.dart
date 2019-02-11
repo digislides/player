@@ -1,5 +1,16 @@
 import 'dart:html';
 
+import 'package:jaguar_resty/jaguar_resty.dart';
+import 'package:http/browser_client.dart';
+
+import 'package:common/models.dart';
+import 'package:player/preview.dart';
+
 void main() {
-  querySelector('#output').text = 'Your Dart app is running.';
+  globalClient = BrowserClient();
+
+  final uri = Uri.parse(window.location.href);
+  String id = uri.queryParameters['id'];
+
+  // TODO
 }

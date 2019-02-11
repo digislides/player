@@ -6,6 +6,8 @@ import '../view.dart';
 class TextItemView implements View {
   final TextItem item;
 
+  final root = DivElement();
+
   TextItemView(this.item);
 
   DivElement build() {

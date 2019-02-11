@@ -7,18 +7,19 @@ import 'view.dart';
 class PageView implements View {
   final Page page;
 
+  final root = DivElement();
+
   PageView(this.page);
 
   final _children = <View>[];
 
   DivElement build() {
-    final root = DivElement()..classes.addAll(['page', 'page-${page.id}']);
-
-    root.style.width = '${page.width}px';
-    root.style.height = '${page.height}px';
+    root.classes.addAll(['page', 'page-${page.id}']);
 
     root.style.left = '0px';
     root.style.top = '0px';
+    root.style.width = '${page.width}px';
+    root.style.height = '${page.height}px';
 
     root.style.backgroundColor = page.color;
     root.style.backgroundImage = page.imageUrl;
@@ -28,9 +29,7 @@ class PageView implements View {
     for (final item in page.items) {
       final child = makeItemView(item);
       _children.add(child);
-      root.children.add(child.build());
+      root.children.add(child.root);
     }
-
-    return root;
   }
 }
