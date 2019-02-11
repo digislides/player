@@ -12,3 +12,23 @@ html, body {
   padding: 20px;
   text-align: center;
 }
+
+.program {
+  position: relative;
+  overflow: hidden;
+}
+
+.frame {
+  position: absolute;
+  overflow: hidden;
+}
+
+.page {
+  position: relative;
+  overflow: hidden;
+}
+
+.page-item {
+  position: absolute;
+  overflow: hidden;
+}

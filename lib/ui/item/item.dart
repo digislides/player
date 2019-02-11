@@ -1,4 +1,6 @@
 import 'package:common/models.dart';
+import '../view.dart';
+
 import 'clock.dart';
 import 'image.dart';
 import 'text.dart';
@@ -11,7 +13,7 @@ export 'text.dart';
 export 'video.dart';
 export 'weather.dart';
 
-dynamic makeItemView(PageItem item) {
+View makeItemView(PageItem item) {
   if (item.type == PageItemType.text) {
     return TextItemView(item);
   } else if (item.type == PageItemType.image) {
