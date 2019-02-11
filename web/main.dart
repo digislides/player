@@ -5,12 +5,21 @@ import 'package:http/browser_client.dart';
 
 import 'package:common/models.dart';
 import 'package:player/preview.dart';
+import 'package:player/utils/api/api.dart';
 
-void main() {
+main() async {
   globalClient = BrowserClient();
 
   final uri = Uri.parse(window.location.href);
   String id = uri.queryParameters['id'];
 
-  // TODO
+  Program program = await programApi.getById(id);
+  if(program == null) {
+    print('No program!');
+    return;
+  }
+
+  final view = ProgramView(program.design);
+
+  document.body.children.add(view.root);
 }
