@@ -8,9 +8,11 @@ class WeatherItemView implements View {
 
   final root = DivElement();
 
-  WeatherItemView(this.item);
+  WeatherItemView(this.item) {
+    _build();
+  }
 
-  void build() {
+  void _build() {
     // TODO
   }
 }

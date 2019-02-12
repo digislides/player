@@ -9,12 +9,14 @@ class ProgramView implements View {
 
   final root = DivElement();
 
-  ProgramView(this.program);
+  ProgramView(this.program) {
+    _build();
+  }
 
   final _children = <View>[];
 
   @override
-  void build() {
+  void _build() {
     root.classes.addAll(['program']);
 
     root.style.left = '0px';

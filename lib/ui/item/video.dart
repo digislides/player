@@ -8,9 +8,11 @@ class VideoItemView implements View {
 
   final root = DivElement();
 
-  VideoItemView(this.item);
+  VideoItemView(this.item) {
+    _build();
+  }
 
-  void build() {
+  void _build() {
     // TODO
   }
 }

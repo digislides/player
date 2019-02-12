@@ -9,11 +9,13 @@ class FrameView implements View {
 
   final root = DivElement();
 
-  FrameView(this.frame);
+  FrameView(this.frame) {
+    _build();
+  }
 
   final _children = <View>[];
 
-  void build() {
+  void _build() {
     root.classes.addAll(['frame', 'frame-${frame.id}']);
 
     root.style.left = '${frame.left}px';
@@ -24,7 +26,7 @@ class FrameView implements View {
     for (final page in frame.pages) {
       final child = PageView(page);
       _children.add(child);
-      root.children.add(child.build());
+      root.children.add(child.root);
     }
   }
 }

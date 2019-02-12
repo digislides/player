@@ -9,11 +9,13 @@ class PageView implements View {
 
   final root = DivElement();
 
-  PageView(this.page);
+  PageView(this.page) {
+    _build();
+  }
 
   final _children = <View>[];
 
-  DivElement build() {
+  void _build() {
     root.classes.addAll(['page', 'page-${page.id}']);
 
     root.style.left = '0px';

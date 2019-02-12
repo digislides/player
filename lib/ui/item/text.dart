@@ -8,9 +8,11 @@ class TextItemView implements View {
 
   final root = DivElement();
 
-  TextItemView(this.item);
+  TextItemView(this.item) {
+    _build();
+  }
 
-  DivElement build() {
+  void _build() {
     final root = DivElement()
       ..classes.addAll(['page-item', 'page-item-text', 'page-item-${item.id}']);
     root.text = item.text;
@@ -29,7 +31,5 @@ class TextItemView implements View {
     root.style.fontWeight = item.font.bold ? 'bold' : 'normal';
     root.style.textDecoration = item.font.underline ? 'underline' : 'none';
     root.style.fontStyle = item.font.italic ? 'italic' : 'normal';
-
-    return root;
   }
 }

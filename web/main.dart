@@ -19,6 +19,8 @@ main() async {
     return;
   }
 
+  print(program.design);
+
   final view = ProgramView(program.design);
 
   document.body.children.add(view.root);
