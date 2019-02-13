@@ -24,4 +24,5 @@ main() async {
   final view = ProgramView(program.design);
 
   document.body.children.add(view.root);
+  view.start();
 }

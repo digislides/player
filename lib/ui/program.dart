@@ -13,7 +13,7 @@ class ProgramView implements View {
     _build();
   }
 
-  final _children = <View>[];
+  final _children = <FrameView>[];
 
   @override
   void _build() {
@@ -28,6 +28,12 @@ class ProgramView implements View {
       final view = FrameView(frame);
       _children.add(view);
       root.children.add(view.root);
+    }
+  }
+
+  void start() {
+    for(final child in _children) {
+      child.start();
     }
   }
 }

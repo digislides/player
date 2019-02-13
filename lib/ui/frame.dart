@@ -1,4 +1,5 @@
 import 'dart:html';
+import 'dart:async';
 import 'page.dart';
 
 import 'package:common/models.dart';
@@ -28,5 +29,29 @@ class FrameView implements View {
       _children.add(child);
       root.children.add(child.root);
     }
+  }
+
+  PageView _currentPlaying;
+
+  int _currentlyPlaying = 0;
+
+  Timer _timer;
+
+  void _playNext() {
+    // TODO what if no pages?
+    PageView nextPlay = _children[_currentlyPlaying];
+    if(_currentPlaying != null) _currentPlaying.stop();
+    nextPlay.play();
+    _currentPlaying = nextPlay;
+    _timer = Timer(Duration(seconds: nextPlay.page.duration), () {
+      _currentlyPlaying++;
+      if(_currentlyPlaying >= _children.length) _currentlyPlaying = 0;
+      _playNext();
+    });
+  }
+
+  void start() {
+    _currentlyPlaying = 0;
+    _playNext();
   }
 }

@@ -34,4 +34,12 @@ class PageView implements View {
       root.children.add(child.root);
     }
   }
+
+  void play() {
+    root.classes.add('show');
+  }
+
+  void stop() {
+    root.classes.remove('show');
+  }
 }
