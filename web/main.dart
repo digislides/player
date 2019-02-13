@@ -14,7 +14,7 @@ main() async {
   String id = uri.queryParameters['id'];
 
   Program program = await programApi.getById(id);
-  if(program == null) {
+  if (program == null) {
     print('No program!');
     return;
   }

@@ -40,12 +40,12 @@ class FrameView implements View {
   void _playNext() {
     // TODO what if no pages?
     PageView nextPlay = _children[_currentlyPlaying];
-    if(_currentPlaying != null) _currentPlaying.stop();
+    if (_currentPlaying != null) _currentPlaying.stop();
     nextPlay.play();
     _currentPlaying = nextPlay;
     _timer = Timer(Duration(seconds: nextPlay.page.duration), () {
       _currentlyPlaying++;
-      if(_currentlyPlaying >= _children.length) _currentlyPlaying = 0;
+      if (_currentlyPlaying >= _children.length) _currentlyPlaying = 0;
       _playNext();
     });
   }

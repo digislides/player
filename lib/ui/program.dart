@@ -24,7 +24,7 @@ class ProgramView implements View {
     root.style.width = '${program.width}px';
     root.style.height = '${program.height}px';
 
-    for(final frame in program.frames) {
+    for (final frame in program.frames) {
       final view = FrameView(frame);
       _children.add(view);
       root.children.add(view.root);
@@ -32,7 +32,7 @@ class ProgramView implements View {
   }
 
   void start() {
-    for(final child in _children) {
+    for (final child in _children) {
       child.start();
     }
   }
