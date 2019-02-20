@@ -13,8 +13,8 @@ class TextItemView implements View {
   }
 
   void _build() {
-    final root = DivElement()
-      ..classes.addAll(['page-item', 'page-item-text', 'page-item-${item.id}']);
+    root.classes
+        .addAll(['page-item', 'page-item-text', 'page-item-${item.id}']);
     root.text = item.text;
 
     root.style.width = '${item.width}px';
