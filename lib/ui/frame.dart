@@ -38,7 +38,9 @@ class FrameView implements View {
   Timer _timer;
 
   void _playNext() {
-    // TODO what if no pages?
+    // Skip, if there are no pages
+    if (_children.isEmpty) return;
+
     PageView nextPlay = _children[_currentlyPlaying];
     if (_currentPlaying != null) _currentPlaying.stop();
     nextPlay.play();

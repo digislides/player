@@ -7,8 +7,12 @@ import 'package:common/models.dart';
 import 'package:player/preview.dart';
 import 'package:player/utils/api/api.dart';
 
+import 'package:player/service_worker/service_window.dart';
+
 main() async {
   globalClient = BrowserClient();
+
+  await window.navigator.serviceWorker.register('/player/sw.dart.js');
 
   final uri = Uri.parse(window.location.href);
   String id = uri.queryParameters['id'];
@@ -21,8 +25,10 @@ main() async {
 
   print(program.design);
 
+  await cacheProgramUrls(id, program.design);
+
   final view = ProgramView(program.design);
 
   document.body.children.add(view.root);
-  view.start();
+  // TODO view.start();
 }

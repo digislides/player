@@ -1,19 +1,27 @@
 import 'dart:async';
-import 'package:service_worker/worker.dart';
-import 'package:service_worker/window.dart';
 
-Future<void> cacheUrls(String db, Map<String, bool> urls) async {
+import 'package:service_worker/worker.dart';
+
+import 'package:common/models.dart';
+
+Future<void> cacheProgramUrls(String id, ProgramDesign program) async {
+  final urls = <String, bool>{};
+
+  program.collectUrls(urls);
+
   for (String url in urls.keys) {
     urls[url] = false;
   }
 
-  Cache cache = await caches.open(db);
+  Cache cache = await caches.open(id);
   final keys = await cache.keys();
 
   for (Request r in keys) {
     if (!urls.containsKey(r.url)) {
+      print("Deleting from cache: " + r.url);
       await cache.delete(r);
     } else {
+      print("Already in cache: " + r.url);
       urls[r.url] = true;
     }
   }
@@ -22,10 +30,11 @@ Future<void> cacheUrls(String db, Map<String, bool> urls) async {
     if (urls[url]) continue;
 
     try {
+      print("Caching: " + url);
       await cache.add(url);
       urls[url] = true;
     } catch (e) {
-      print(e);
+      print("Caching failed: " + e?.toString());
     }
   }
 }
