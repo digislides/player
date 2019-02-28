@@ -36,4 +36,9 @@ class ProgramView implements View {
       child.start();
     }
   }
+
+  void purge() {
+    // TODO
+    root.remove();
+  }
 }
