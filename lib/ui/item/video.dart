@@ -29,6 +29,7 @@ class VideoItemView implements PageItemView {
     video..style.objectFit = item.fit.css;
     video.style.width = "100%";
     video.style.height = "100%";
+    video.muted = item.muted;
     video.children.add(SourceElement()..src = item.videoUrl);
 
     root.children.add(video);

@@ -30,12 +30,12 @@ class ClockItemView implements PageItemView {
   }
 
   @override
-  void stop() {
+  void play() {
 
   }
 
   @override
-  void play() {
+  void stop() {
 
   }
 }
