@@ -4,7 +4,7 @@ import 'package:common/models.dart';
 import '../view.dart';
 import 'package:wclient/utils/components/clock.dart';
 
-class ClockItemView implements View {
+class ClockItemView implements PageItemView {
   final ClockItem item;
 
   final root = DivElement();
@@ -27,6 +27,16 @@ class ClockItemView implements View {
 
     root.style.left = '${item.left}px';
     root.style.top = '${item.top}px';
+  }
+
+  @override
+  void stop() {
+
+  }
+
+  @override
+  void play() {
+
   }
 }
 

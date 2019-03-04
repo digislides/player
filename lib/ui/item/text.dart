@@ -3,7 +3,7 @@ import 'dart:html';
 import 'package:common/models.dart';
 import '../view.dart';
 
-class TextItemView implements View {
+class TextItemView implements PageItemView {
   final TextItem item;
 
   final root = DivElement();
@@ -31,5 +31,15 @@ class TextItemView implements View {
     root.style.fontWeight = item.font.bold ? 'bold' : 'normal';
     root.style.textDecoration = item.font.underline ? 'underline' : 'none';
     root.style.fontStyle = item.font.italic ? 'italic' : 'normal';
+  }
+
+  @override
+  void play() {
+
+  }
+
+  @override
+  void stop() {
+
   }
 }

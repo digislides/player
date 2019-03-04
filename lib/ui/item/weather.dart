@@ -3,7 +3,7 @@ import 'dart:html';
 import 'package:common/models.dart';
 import '../view.dart';
 
-class WeatherItemView implements View {
+class WeatherItemView implements PageItemView {
   final WeatherItem item;
 
   final root = DivElement();
@@ -14,5 +14,15 @@ class WeatherItemView implements View {
 
   void _build() {
     // TODO
+  }
+
+  @override
+  void play() {
+
+  }
+
+  @override
+  void stop() {
+
   }
 }

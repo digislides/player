@@ -13,7 +13,7 @@ class PageView implements View {
     _build();
   }
 
-  final _children = <View>[];
+  final _children = <PageItemView>[];
 
   void _build() {
     root.classes.addAll(['page', 'page-${page.id}']);
@@ -37,9 +37,15 @@ class PageView implements View {
 
   void play() {
     root.classes.add('show');
+    for(PageItemView view in _children) {
+      view.play();
+    }
   }
 
   void stop() {
     root.classes.remove('show');
+    for(PageItemView view in _children) {
+      view.stop();
+    }
   }
 }

@@ -3,7 +3,7 @@ import 'dart:html';
 import 'package:common/models.dart';
 import '../view.dart';
 
-class ImageItemView implements View {
+class ImageItemView implements PageItemView {
   final ImageItem item;
 
   final root = DivElement();
@@ -26,5 +26,15 @@ class ImageItemView implements View {
     root.style.backgroundImage = item.imageUrl;
     root.style.backgroundRepeat = item.fit.repeatCss;
     root.style.backgroundSize = item.fit.sizeCss;
+  }
+
+  @override
+  void play() {
+
+  }
+
+  @override
+  void stop() {
+
   }
 }
