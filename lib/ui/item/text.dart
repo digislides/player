@@ -34,12 +34,8 @@ class TextItemView implements PageItemView {
   }
 
   @override
-  void play() {
-
-  }
+  void play() {}
 
   @override
-  void stop() {
-
-  }
+  void stop() {}
 }

@@ -37,14 +37,14 @@ class PageView implements View {
 
   void play() {
     root.classes.add('show');
-    for(PageItemView view in _children) {
+    for (PageItemView view in _children) {
       view.play();
     }
   }
 
   void stop() {
     root.classes.remove('show');
-    for(PageItemView view in _children) {
+    for (PageItemView view in _children) {
       view.stop();
     }
   }
