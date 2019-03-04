@@ -20,6 +20,12 @@ class ClockItemView implements PageItemView {
     // TODO background
 
     _clockComp.timezone = item.timezone;
+    _clockComp.time = DateTime.now();
+    _clockComp.textColor = item.textColor;
+    _clockComp.color = item.color;
+    _clockComp.image = item.imageUrl;
+    _clockComp.hourColor = item.hourColor;
+    _clockComp.minuteColor = item.minuteColor;
 
     root
       ..classes.addAll(['page-item', 'page-item-clock', 'page-item-${item.id}'])
@@ -30,8 +36,6 @@ class ClockItemView implements PageItemView {
 
     root.style.left = '${item.left}px';
     root.style.top = '${item.top}px';
-
-    _clockComp.time = DateTime.now();
   }
 
   Timer _timer;
