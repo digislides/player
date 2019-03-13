@@ -14,7 +14,7 @@ class FrameView implements View {
     _build();
   }
 
-  final _children = <View>[];
+  // final _children = <View>[];
 
   void _build() {
     root.classes.addAll(['frame', 'frame-${frame.id}']);
@@ -24,11 +24,13 @@ class FrameView implements View {
     root.style.width = '${frame.width}px';
     root.style.height = '${frame.height}px';
 
+    /*
     for (final page in frame.pages) {
       final child = PageView(page);
       _children.add(child);
       root.children.add(child.root);
     }
+    */
   }
 
   PageView _currentPlaying;
@@ -39,15 +41,20 @@ class FrameView implements View {
 
   void _playNext() {
     // Skip, if there are no pages
-    if (_children.isEmpty) return;
+    if (frame.pages.isEmpty) return;
 
-    PageView nextPlay = _children[_currentlyPlaying];
-    if (_currentPlaying != null) _currentPlaying.stop();
+    PageView nextPlay = PageView(frame.pages[_currentlyPlaying]);
+    if (_currentPlaying != null) {
+      // TODO perform exit transition
+      _currentPlaying.stop();
+      _currentPlaying.root.remove();
+    }
+    root.children.add(nextPlay.root);
     nextPlay.play();
     _currentPlaying = nextPlay;
     _timer = Timer(Duration(seconds: nextPlay.page.duration), () {
       _currentlyPlaying++;
-      if (_currentlyPlaying >= _children.length) _currentlyPlaying = 0;
+      if (_currentlyPlaying >= frame.pages.length) _currentlyPlaying = 0;
       _playNext();
     });
   }
@@ -56,4 +63,6 @@ class FrameView implements View {
     _currentlyPlaying = 0;
     _playNext();
   }
+
+  void stop() {}
 }

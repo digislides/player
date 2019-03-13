@@ -15,7 +15,6 @@ class ProgramView implements View {
 
   final _children = <FrameView>[];
 
-  @override
   void _build() {
     root.classes.addAll(['program']);
 
@@ -31,14 +30,19 @@ class ProgramView implements View {
     }
   }
 
-  void start() {
+  Future<void> start() async {
+    try {
+      await program.dataRepository.start();
+    } catch (e) {}
     for (final child in _children) {
       child.start();
     }
   }
 
-  void purge() {
-    // TODO
+  Future<void> purge() async {
+    try {
+      await program.dataRepository.stop();
+    } catch (e) {}
     root.remove();
   }
 }

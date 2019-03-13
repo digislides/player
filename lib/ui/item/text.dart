@@ -15,7 +15,7 @@ class TextItemView implements PageItemView {
   void _build() {
     root.classes
         .addAll(['page-item', 'page-item-text', 'page-item-${item.id}']);
-    root.text = item.text;
+    root.text = item.linkedText;
 
     root.style.width = '${item.width}px';
     root.style.height = '${item.height}px';
