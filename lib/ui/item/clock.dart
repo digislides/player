@@ -3,7 +3,7 @@ import 'dart:async';
 
 import 'package:common/models.dart';
 import '../view.dart';
-import 'package:wclient/utils/components/clock.dart';
+import 'package:wclient/src/utils/components/clock.dart';
 
 class ClockItemView implements PageItemView {
   final ClockItem item;
