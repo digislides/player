@@ -1,5 +1,6 @@
 import 'dart:html';
 import 'item/item.dart';
+import 'dart:async';
 
 import 'package:common/models.dart';
 import 'view.dart';
@@ -37,15 +38,22 @@ class PageView implements View {
 
   void play() {
     root.classes.add('show');
+    /*if(page.transition != 0)*/
+    root.classes.addAll(['new', 'transition-${page.transition.css}']);
     for (PageItemView view in _children) {
       view.play();
     }
   }
 
-  void stop() {
-    root.classes.remove('show');
+  Future<void> stop({Transition transition}) async {
+    root.classes
+        .removeAll(<String>['new', 'transition-${page.transition.css}']);
+    root.classes.add('old');
+    /* if(transition != 0) */ root.classes.add('transition-${transition.css}');
     for (PageItemView view in _children) {
       view.stop();
     }
+    await Future.delayed(Duration(seconds: 2));
+    root.remove();
   }
 }

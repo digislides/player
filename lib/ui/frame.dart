@@ -10,6 +10,8 @@ class FrameView implements View {
 
   final root = DivElement();
 
+  final _holder = DivElement()..classes.add('holder');
+
   FrameView(this.frame) {
     _build();
   }
@@ -23,6 +25,8 @@ class FrameView implements View {
     root.style.top = '${frame.top}px';
     root.style.width = '${frame.width}px';
     root.style.height = '${frame.height}px';
+
+    root.children.add(_holder);
 
     /*
     for (final page in frame.pages) {
@@ -45,11 +49,12 @@ class FrameView implements View {
 
     PageView nextPlay = PageView(frame.pages[_currentlyPlaying]);
     if (_currentPlaying != null) {
+      final cp = _currentPlaying;
       // TODO perform exit transition
-      _currentPlaying.stop();
-      _currentPlaying.root.remove();
+      cp.stop(transition: nextPlay.page.transition);
+      // TODO _currentPlaying.root.remove();
     }
-    root.children.add(nextPlay.root);
+    _holder.children.add(nextPlay.root);
     nextPlay.play();
     _currentPlaying = nextPlay;
     _timer = Timer(Duration(seconds: nextPlay.page.duration), () {
