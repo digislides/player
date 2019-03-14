@@ -13,9 +13,17 @@ class TextItemView implements PageItemView {
   }
 
   void _build() {
+    final span = SpanElement();
+    span.text = item.linkedText;
+
+    final holder = DivElement()..classes.add('holder');
+    holder.style.alignItems = item.font.valign.css;
+    holder.children.add(span);
+
     root.classes
         .addAll(['page-item', 'page-item-text', 'page-item-${item.id}']);
-    root.text = item.linkedText;
+
+    root.children.add(holder);
 
     root.style.width = '${item.width}px';
     root.style.height = '${item.height}px';
