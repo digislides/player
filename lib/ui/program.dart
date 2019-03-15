@@ -23,6 +23,11 @@ class ProgramView implements View {
     root.style.width = '${program.width}px';
     root.style.height = '${program.height}px';
 
+    root.style.backgroundColor = program.color;
+    root.style.backgroundImage = program.imageUrl;
+    root.style.backgroundRepeat = program.fit.repeatCss;
+    root.style.backgroundSize = program.fit.sizeCss;
+
     for (final frame in program.frames) {
       final view = FrameView(frame);
       _children.add(view);
