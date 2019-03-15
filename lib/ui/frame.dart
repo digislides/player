@@ -16,8 +16,6 @@ class FrameView implements View {
     _build();
   }
 
-  // final _children = <View>[];
-
   void _build() {
     root.classes.addAll(['frame', 'frame-${frame.id}']);
 
@@ -26,15 +24,12 @@ class FrameView implements View {
     root.style.width = '${frame.width}px';
     root.style.height = '${frame.height}px';
 
-    root.children.add(_holder);
+    root.style.backgroundColor = frame.color;
+    root.style.backgroundImage = frame.imageUrl;
+    root.style.backgroundRepeat = frame.fit.repeatCss;
+    root.style.backgroundSize = frame.fit.sizeCss;
 
-    /*
-    for (final page in frame.pages) {
-      final child = PageView(page);
-      _children.add(child);
-      root.children.add(child.root);
-    }
-    */
+    root.children.add(_holder);
   }
 
   PageView _currentPlaying;
@@ -47,12 +42,11 @@ class FrameView implements View {
     // Skip, if there are no pages
     if (frame.pages.isEmpty) return;
 
-    PageView nextPlay = PageView(frame.pages[_currentlyPlaying]);
+    PageView nextPlay =
+        PageView(frame.pages[_currentlyPlaying], frame.transition);
     if (_currentPlaying != null) {
       final cp = _currentPlaying;
-      // TODO perform exit transition
-      cp.stop(transition: nextPlay.page.transition);
-      // TODO _currentPlaying.root.remove();
+      cp.stop(exitTransition: nextPlay.transition);
     }
     _holder.children.add(nextPlay.root);
     nextPlay.play();

@@ -8,9 +8,11 @@ import 'view.dart';
 class PageView implements View {
   final Page page;
 
+  final Transition defaultTransition;
+
   final root = DivElement();
 
-  PageView(this.page) {
+  PageView(this.page, this.defaultTransition) {
     _build();
   }
 
@@ -36,20 +38,23 @@ class PageView implements View {
     }
   }
 
+  Transition get transition {
+    if (page.transition != Transition.none) return page.transition;
+    return defaultTransition;
+  }
+
   void play() {
     root.classes.add('show');
-    /*if(page.transition != 0)*/
-    root.classes.addAll(['new', 'transition-${page.transition.css}']);
+    root.classes.addAll(['new', 'transition-${transition.css}']);
     for (PageItemView view in _children) {
       view.play();
     }
   }
 
-  Future<void> stop({Transition transition}) async {
-    root.classes
-        .removeAll(<String>['new', 'transition-${page.transition.css}']);
+  Future<void> stop({Transition exitTransition}) async {
+    root.classes.removeAll(<String>['new', 'transition-${transition.css}']);
     root.classes.add('old');
-    /* if(transition != 0) */ root.classes.add('transition-${transition.css}');
+    root.classes.add('transition-${exitTransition.css}');
     for (PageItemView view in _children) {
       view.stop();
     }
