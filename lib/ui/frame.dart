@@ -42,20 +42,47 @@ class FrameView implements View {
     // Skip, if there are no pages
     if (frame.pages.isEmpty) return;
 
-    PageView nextPlay =
-        PageView(frame.pages[_currentlyPlaying], frame.transition);
+    bool hasNext = _getNext();
+
+    PageView nextPlay;
+    if (hasNext) {
+      nextPlay = PageView(frame.pages[_currentlyPlaying], frame.transition);
+    }
+
     if (_currentPlaying != null) {
       final cp = _currentPlaying;
-      cp.stop(exitTransition: nextPlay.transition);
+      cp.stop(exitTransition: nextPlay?.transition ?? Transition.none);
     }
-    _holder.children.add(nextPlay.root);
-    nextPlay.play();
-    _currentPlaying = nextPlay;
-    _timer = Timer(Duration(seconds: nextPlay.page.duration), () {
-      _currentlyPlaying++;
-      if (_currentlyPlaying >= frame.pages.length) _currentlyPlaying = 0;
-      _playNext();
-    });
+
+    if (hasNext) {
+      _holder.children.add(nextPlay.root);
+      nextPlay.play();
+      _currentPlaying = nextPlay;
+      _timer = Timer(Duration(seconds: nextPlay.page.duration), () {
+        _playNext();
+      });
+    } else {
+      _currentPlaying == null;
+      _timer = Timer(Duration(minutes: 1), () {
+        _playNext();
+      });
+    }
+  }
+
+  bool _getNext() {
+    int newP = _currentlyPlaying;
+
+    do {
+      final page = frame.pages[newP];
+      if (page.schedule.canRun(DateTime.now())) {
+        _currentlyPlaying = newP;
+        return true;
+      }
+      newP++;
+      if (newP >= frame.pages.length) newP = 0;
+    } while (_currentlyPlaying != newP);
+
+    return false;
   }
 
   void start() {
