@@ -73,13 +73,14 @@ class FrameView implements View {
     int newP = _currentlyPlaying;
 
     do {
+      newP++;
+      if (newP >= frame.pages.length) newP = 0;
+
       final page = frame.pages[newP];
       if (page.schedule.canRun(DateTime.now())) {
         _currentlyPlaying = newP;
         return true;
       }
-      newP++;
-      if (newP >= frame.pages.length) newP = 0;
     } while (_currentlyPlaying != newP);
 
     return false;
