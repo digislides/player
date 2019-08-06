@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:html';
 
 import 'package:common/models.dart';
@@ -13,8 +14,12 @@ class TextItemView implements PageItemView {
   }
 
   void _build() {
-    final span = SpanElement();
-    span.text = item.linkedText;
+    final span = DivElement();
+    final lines = LineSplitter.split(item.linkedText).toList();
+    for (int i = 0; i < lines.length; i++) {
+      span.children.add(SpanElement()..text = lines[i]);
+      if (i < lines.length - 1) span.children.add(BRElement());
+    }
 
     final holder = DivElement()..classes.add('holder');
     holder.style.alignItems = item.font.valign.css;
