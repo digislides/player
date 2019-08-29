@@ -34,7 +34,7 @@ class FrameView implements View {
 
   PageView _currentPlaying;
 
-  int _currentlyPlaying = 0;
+  int _currentlyPlaying = -1;
 
   Timer _timer;
 
@@ -87,7 +87,7 @@ class FrameView implements View {
   }
 
   void start() {
-    _currentlyPlaying = 0;
+    _currentlyPlaying = -1;
     _playNext();
   }
 

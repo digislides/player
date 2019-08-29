@@ -21,8 +21,8 @@ class PageView implements View {
   void _build() {
     root.classes.addAll(['page', 'page-${page.id}']);
 
-    root.style.left = '0px';
-    root.style.top = '0px';
+    // root.style.left = '0px';
+    // root.style.top = '0px';
     root.style.width = '${page.width}px';
     root.style.height = '${page.height}px';
 
@@ -49,6 +49,12 @@ class PageView implements View {
     for (PageItemView view in _children) {
       view.play();
     }
+    /*
+    Future.delayed(Duration(seconds: 2)).then((_) {
+      root.classes.removeAll(['new', 'transition-${transition.css}']);
+      root.classes.add('transition-none');
+    });
+     */
   }
 
   Future<void> stop({Transition exitTransition}) async {

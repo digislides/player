@@ -1,4 +1,5 @@
 import 'package:common/models.dart';
+import 'package:player/ui/item/widget.dart';
 import '../view.dart';
 
 import 'clock.dart';
@@ -24,6 +25,8 @@ View makeItemView(PageItem item) {
     return ClockItemView(item);
   } else if (item.type == PageItemType.weather) {
     return WeatherItemView(item);
+  } else if(item.type == PageItemType.widget) {
+    return WidgetItemView(item);
   }
   throw Exception("Invalid item!");
 }
