@@ -14,22 +14,23 @@ class TextItemView implements PageItemView {
   }
 
   void _build() {
-    final span = DivElement();
-    final lines = LineSplitter.split(item.linkedText).toList();
-    for (int i = 0; i < lines.length; i++) {
-      span.children.add(SpanElement()..text = lines[i]);
-      if (i < lines.length - 1) span.children.add(BRElement());
-    }
-
     final holder = DivElement()..classes.add('holder');
     holder.style.alignItems = item.font.valign.css;
-    holder.children.add(span);
+    holder.style.textAlign = item.font.align.toString();
+
+
+    final lines = LineSplitter.split(item.linkedText).toList();
+    for (int i = 0; i < lines.length; i++) {
+      holder.nodes.add(Text(lines[i]));
+      if (i < lines.length - 1) holder.children.add(BRElement());
+    }
 
     root.classes
         .addAll(['page-item', 'page-item-text', 'page-item-${item.id}']);
 
     root.children.add(holder);
 
+    root.style.display = 'flex';
     root.style.width = '${item.width}px';
     root.style.height = '${item.height}px';
 
@@ -40,7 +41,7 @@ class TextItemView implements PageItemView {
 
     root.style.fontSize = '${item.font.size}px';
     root.style.color = item.font.color;
-    root.style.textAlign = item.font.align.toString();
+    root.style.alignItems = item.font.valign.css;
     root.style.fontWeight = item.font.bold ? 'bold' : 'normal';
     root.style.textDecoration = item.font.underline ? 'underline' : 'none';
     root.style.fontStyle = item.font.italic ? 'italic' : 'normal';
