@@ -23,8 +23,6 @@ main() async {
     return;
   }
 
-  print(program.design);
-
   await cacheProgramUrls(id, program.design);
 
   final view = ProgramView(program.design);

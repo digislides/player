@@ -1,4 +1,5 @@
 import 'package:common/models.dart';
+import 'package:player/ui/item/scroller.dart';
 import 'package:player/ui/item/widget.dart';
 import '../view.dart';
 
@@ -27,6 +28,8 @@ View makeItemView(PageItem item) {
     return WeatherItemView(item);
   } else if(item.type == PageItemType.widget) {
     return WidgetItemView(item);
+  } else if(item.type == PageItemType.scroller) {
+    return ScrollerItemView(item);
   }
   throw Exception("Invalid item!");
 }
