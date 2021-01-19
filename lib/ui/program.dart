@@ -9,7 +9,9 @@ class ProgramView implements View {
 
   final root = DivElement();
 
-  ProgramView(this.program) {
+  final bool isPreview;
+
+  ProgramView(this.program, {this.isPreview = true}) {
     _build();
   }
 
@@ -24,12 +26,13 @@ class ProgramView implements View {
     root.style.height = '${program.height}px';
 
     root.style.backgroundColor = program.color;
-    root.style.backgroundImage = program.imageUrl;
+    root.style.backgroundImage =
+        isPreview ? program.imageUrl : processForeignUrl(program.imageUrl);
     root.style.backgroundRepeat = program.fit.repeatCss;
     root.style.backgroundSize = program.fit.sizeCss;
 
     for (final frame in program.frames) {
-      final view = FrameView(frame);
+      final view = FrameView(frame, isPreview: isPreview);
       _children.add(view);
       root.children.add(view.root);
     }

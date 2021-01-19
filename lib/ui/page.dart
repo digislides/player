@@ -8,11 +8,13 @@ import 'view.dart';
 class PageView implements View {
   final Page page;
 
+  final bool isPreview;
+
   final Transition defaultTransition;
 
   final root = DivElement();
 
-  PageView(this.page, this.defaultTransition) {
+  PageView(this.page, this.defaultTransition, {this.isPreview = true}) {
     _build();
   }
 
@@ -27,12 +29,13 @@ class PageView implements View {
     root.style.height = '${page.height}px';
 
     root.style.backgroundColor = page.color;
-    root.style.backgroundImage = page.imageUrl;
+    root.style.backgroundImage =
+        isPreview ? page.imageUrl : processForeignUrl(page.imageUrl);
     root.style.backgroundRepeat = page.fit.repeatCss;
     root.style.backgroundSize = page.fit.sizeCss;
 
     for (final item in page.items) {
-      final child = makeItemView(item);
+      final child = makeItemView(item, isPreview: isPreview);
       _children.add(child);
       root.children.add(child.root);
     }

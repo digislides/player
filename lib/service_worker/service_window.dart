@@ -1,5 +1,7 @@
+import 'dart:html';
 import 'dart:async';
 
+import 'package:player/ui/view.dart';
 import 'package:service_worker/worker.dart';
 
 import 'package:common/models.dart';
@@ -10,7 +12,9 @@ Future<void> cacheProgramUrls(String id, ProgramDesign program) async {
   program.collectUrls(urls);
 
   for (String url in urls.keys) {
-    urls[url] = false;
+    final newUrl = processForeignUrl(url);
+    if (newUrl == url) continue;
+    urls[newUrl] = null;
   }
 
   Cache cache = await caches.open(id);

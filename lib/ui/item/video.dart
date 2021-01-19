@@ -6,11 +6,13 @@ import '../view.dart';
 class VideoItemView implements PageItemView {
   final VideoItem item;
 
+  final bool isPreview;
+
   final root = DivElement();
 
   final video = VideoElement();
 
-  VideoItemView(this.item) {
+  VideoItemView(this.item, {this.isPreview = true}) {
     _build();
   }
 
@@ -30,7 +32,8 @@ class VideoItemView implements PageItemView {
     video.style.width = "100%";
     video.style.height = "100%";
     video.muted = item.muted;
-    video.children.add(SourceElement()..src = item.videoUrl);
+    video.children.add(SourceElement()
+      ..src = isPreview ? item.videoUrl : processForeignUrl(item.videoUrl));
 
     root.children.add(video);
   }

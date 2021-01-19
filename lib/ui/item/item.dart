@@ -15,11 +15,11 @@ export 'text.dart';
 export 'video.dart';
 export 'weather.dart';
 
-View makeItemView(PageItem item) {
+View makeItemView(PageItem item, {bool isPreview = true}) {
   if (item.type == PageItemType.text) {
     return TextItemView(item);
   } else if (item.type == PageItemType.image) {
-    return ImageItemView(item);
+    return ImageItemView(item, isPreview: isPreview);
   } else if (item.type == PageItemType.video) {
     return VideoItemView(item);
   } else if (item.type == PageItemType.clock) {

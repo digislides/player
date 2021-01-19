@@ -8,11 +8,13 @@ import 'package:wclient/src/utils/components/clock.dart';
 class ClockItemView implements PageItemView {
   final ClockItem item;
 
+  final bool isPreview;
+
   final root = DivElement();
 
   final _clockComp = ClockComponent();
 
-  ClockItemView(this.item) {
+  ClockItemView(this.item, {this.isPreview = true}) {
     _build();
   }
 
@@ -23,7 +25,8 @@ class ClockItemView implements PageItemView {
     _clockComp.time = DateTime.now();
     _clockComp.textColor = item.textColor;
     _clockComp.color = item.color;
-    _clockComp.image = item.imageUrl;
+    _clockComp.image =
+        isPreview ? item.imageUrl : processForeignUrl(item.imageUrl);
     _clockComp.hourColor = item.hourColor;
     _clockComp.minuteColor = item.minuteColor;
 

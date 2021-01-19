@@ -8,11 +8,13 @@ import 'view.dart';
 class FrameView implements View {
   final Frame frame;
 
+  final bool isPreview;
+
   final root = DivElement();
 
   final _holder = DivElement()..classes.add('holder');
 
-  FrameView(this.frame) {
+  FrameView(this.frame, {this.isPreview = true}) {
     _build();
   }
 
@@ -25,7 +27,8 @@ class FrameView implements View {
     root.style.height = '${frame.height}px';
 
     root.style.backgroundColor = frame.color;
-    root.style.backgroundImage = frame.imageUrl;
+    root.style.backgroundImage =
+        isPreview ? frame.imageUrl : processForeignUrl(frame.imageUrl);
     root.style.backgroundRepeat = frame.fit.repeatCss;
     root.style.backgroundSize = frame.fit.sizeCss;
 
@@ -46,7 +49,7 @@ class FrameView implements View {
 
     PageView nextPlay;
     if (hasNext) {
-      nextPlay = PageView(frame.pages[_currentlyPlaying], frame.transition);
+      nextPlay = PageView(frame.pages[_currentlyPlaying], frame.transition, isPreview: isPreview);
     }
 
     if (_currentPlaying != null) {

@@ -6,9 +6,11 @@ import '../view.dart';
 class ImageItemView implements PageItemView {
   final ImageItem item;
 
+  final bool isPreview;
+
   final root = DivElement();
 
-  ImageItemView(this.item) {
+  ImageItemView(this.item, {this.isPreview = true}) {
     _build();
   }
 
@@ -23,7 +25,8 @@ class ImageItemView implements PageItemView {
     root.style.top = '${item.top}px';
 
     root.style.backgroundColor = item.color;
-    root.style.backgroundImage = item.imageUrl;
+    root.style.backgroundImage =
+        isPreview ? item.imageUrl : processForeignUrl(item.imageUrl);
     root.style.backgroundRepeat = item.fit.repeatCss;
     root.style.backgroundSize = item.fit.sizeCss;
   }
